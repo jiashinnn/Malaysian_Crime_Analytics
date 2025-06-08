@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Crime Statistics Malaysia{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="display-4 fw-bold mb-3">Malaysia Crime Statistics & Prediction</h1>
+        <p class="lead">Analyze and predict crime trends across Malaysian states and districts</p>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>About This Project</h4>
+            </div>
+            <div class="card-body">
+                <p>This platform provides comprehensive insights into crime statistics across Malaysia, with data analyzed by:</p>
+                <ul>
+                    <li>States and districts</li>
+                    <li>Crime categories and types</li>
+                    <li>Yearly trends and patterns</li>
+                </ul>
+                <p>Our interactive dashboard visualizes this data, while our prediction system uses machine learning to forecast crime trends based on historical patterns.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                    <a href="/dashboard" class="btn btn-primary me-md-2">
+                        <i class="bi bi-graph-up me-1"></i> View Dashboard
+                    </a>
+                    <a href="/predict" class="btn btn-outline-primary">
+                        <i class="bi bi-lightning me-1"></i> Try Prediction
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-database me-2"></i>Dataset Information</h4>
+            </div>
+            <div class="card-body">
+                <p>Our analysis is based on comprehensive crime data from Malaysia, covering:</p>
+                <div class="row text-center">
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-geo-alt" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">14 States</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-map" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">150+ Districts</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-calendar3" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">8 Years</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-tag" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">2 Categories</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-list-check" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">12 Types</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 mb-3">
+                        <div class="p-3 bg-secondary-custom rounded">
+                            <i class="bi bi-graph-up-arrow" style="font-size: 2rem;"></i>
+                            <h5 class="mt-2">Ten Thousands of Records</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Crime in Malaysia: Overview</h4>
+            </div>
+            <div class="card-body">
+                <p>Malaysia has seen significant changes in crime patterns over the years. Key insights include:</p>
+                <div class="row mt-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-xgb">
+                            <div class="card-body text-center">
+                                <i class="bi bi-graph-down text-primary-dark mb-3" style="font-size: 2.5rem;"></i>
+                                <h5>Declining Trend</h5>
+                                <p class="mb-0">Overall crime rates have generally declined over the past decade due to improved policing and prevention strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-xgb">
+                            <div class="card-body text-center">
+                                <i class="bi bi-building text-primary-dark mb-3" style="font-size: 2.5rem;"></i>
+                                <h5>Urban Concentration</h5>
+                                <p class="mb-0">Crime remains concentrated in urban areas, with significant variations between states and districts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-xgb">
+                            <div class="card-body text-center">
+                                <i class="bi bi-laptop text-primary-dark mb-3" style="font-size: 2.5rem;"></i>
+                                <h5>Evolving Types</h5>
+                                <p class="mb-0">While traditional crime types show declines, newer forms like cybercrime have been increasing in recent years.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Crime Statistics Malaysia{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="display-5 fw-bold mb-3">Crime Statistics Dashboard</h1>
+        <p class="lead">Interactive visualization of crime data across Malaysian states and districts</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0"><i class="bi bi-graph-up me-2"></i>Interactive Dashboard</h4>
+                <a href="https://app.powerbi.com/reportEmbed?reportId=3fd749c3-98da-4c20-b46a-4f83e2473616&autoAuth=true&ctid=d494e113-528e-40ab-90d9-162de2fca3f3" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-box-arrow-up-right me-1"></i>Open in New Tab
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="ratio ratio-16x9" style="min-height: 700px;">
+                    <iframe id="power-bi-frame" title="Crime Statistics Dashboard" src="https://app.powerbi.com/reportEmbed?reportId=3fd749c3-98da-4c20-b46a-4f83e2473616&autoAuth=true&ctid=d494e113-528e-40ab-90d9-162de2fca3f3" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>Dashboard Information</h4>
+            </div>
+            <div class="card-body">
+                <p>This interactive dashboard provides comprehensive visualization of crime statistics across Malaysia. The dashboard features:</p>
+                <ul>
+                    <li><strong>Geographic Distribution:</strong> View crime patterns across states and districts</li>
+                    <li><strong>Temporal Trends:</strong> Analyze how crime rates have changed over time</li>
+                    <li><strong>Crime Categories:</strong> Break down data by different crime categories and types</li>
+                    <li><strong>Comparative Analysis:</strong> Compare statistics between different regions and time periods</li>
+                </ul>
+                <p>Use the interactive filters and controls within the dashboard to customize your view and explore specific aspects of the data.</p>
+                <div class="alert alert-info mt-3">
+                    <i class="bi bi-lightbulb me-2"></i>
+                    <strong>Tip:</strong> You can click on elements within the dashboard to filter the data and gain deeper insights.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Dashboard specific JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

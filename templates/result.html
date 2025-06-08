@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction Result - Crime Statistics Malaysia{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="display-5 fw-bold mb-3">Prediction Result</h1>
+        <p class="lead">Estimated crime count based on your input parameters</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-bar-chart-line me-2"></i>Prediction Result</h4>
+            </div>
+            <div class="card-body text-center py-5">
+                <h2 class="mb-3">Predicted Crime Count</h2>
+                <div class="prediction-result mb-4">{{ prediction }}</div>
+                
+                {% if is_future_prediction %}
+                <div class="alert alert-warning mb-4">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <strong>Future Prediction:</strong> This is an extrapolated prediction for a future year (beyond 2023). Results are based on trend analysis and may have reduced accuracy.
+                </div>
+                {% endif %}
+                
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10">
+                        <div class="card bg-secondary-custom">
+                            <div class="card-body">
+                                <h5 class="mb-3">Your Input Parameters:</h5>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-2">
+                                        <strong>State:</strong> {{ input.state }}
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <strong>District:</strong> {{ input.district }}
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <strong>Category:</strong> {{ input.category }}
+                                    </div>
+                                    <div class="col-sm-6 mb-2">
+                                        <strong>Type:</strong> {{ input.type }}
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                        <strong>Year:</strong> {{ input.year }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if input.state %}
+                <div class="alert alert-info mb-4">
+                    {% if input.state == 'Johor' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Johor:</strong> Located in the southern region of Peninsular Malaysia, Johor has 10 districts including Johor Bahru, which is the state capital.
+                    {% elif input.state == 'Kedah' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Kedah:</strong> Known as the "Rice Bowl of Malaysia," Kedah is located in the northwestern part of Peninsular Malaysia.
+                    {% elif input.state == 'Kelantan' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Kelantan:</strong> Located in the northeastern corner of Peninsular Malaysia, Kelantan is known for its rich cultural heritage.
+                    {% elif input.state == 'Melaka' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Melaka:</strong> A historical state in the southern region of Peninsular Malaysia with a rich colonial past.
+                    {% elif input.state == 'Negeri Sembilan' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Negeri Sembilan:</strong> Located in the western coast of Peninsular Malaysia, known for its unique Minangkabau culture.
+                    {% elif input.state == 'Pahang' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Pahang:</strong> The largest state in Peninsular Malaysia, known for its vast rainforests and natural attractions.
+                    {% elif input.state == 'Perak' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Perak:</strong> Located in the northwest of Peninsular Malaysia, Perak was once famous for its tin mining industry.
+                    {% elif input.state == 'Perlis' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Perlis:</strong> The smallest state in Malaysia, located in the northern part of the west coast of Peninsular Malaysia.
+                    {% elif input.state == 'Pulau Pinang' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Pulau Pinang:</strong> Also known as Penang, it's an island state on the northwest coast of Peninsular Malaysia known for its cultural diversity.
+                    {% elif input.state == 'Sabah' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Sabah:</strong> Located in East Malaysia on the island of Borneo, Sabah is known for its biodiversity and natural attractions.
+                    {% elif input.state == 'Sarawak' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Sarawak:</strong> The largest state in Malaysia, located in East Malaysia on the island of Borneo, known for its diverse indigenous cultures.
+                    {% elif input.state == 'Selangor' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Selangor:</strong> One of the most developed and populated states in Malaysia, located on the west coast of Peninsular Malaysia.
+                    {% elif input.state == 'Terengganu' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Terengganu:</strong> Located on the eastern coast of Peninsular Malaysia, known for its beautiful beaches and islands.
+                    {% elif input.state == 'W.P. Kuala Lumpur' %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>W.P. Kuala Lumpur:</strong> The capital city of Malaysia and its largest urban area, serving as the cultural and economic center of the country.
+                    {% else %}
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>{{ input.state }}:</strong> One of Malaysia's diverse states or territories.
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <a href="/predict" class="btn btn-primary">
+                    <i class="bi bi-arrow-left me-1"></i> Make Another Prediction
+                </a>
+                <a href="/" class="btn btn-outline-primary ms-2">
+                    <i class="bi bi-house me-1"></i> Return to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>How This Prediction Works</h4>
+            </div>
+            <div class="card-body">
+                <p>This prediction is generated using an ensemble of three machine learning models:</p>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-rf">
+                            <div class="card-header bg-rf">
+                                <h5 class="mb-0">Random Forest</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="display-6 mb-2">{{ prediction_details.rf }}</div>
+                                <p class="mb-0 small">Captures complex relationships</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-xgb">
+                            <div class="card-header bg-xgb">
+                                <h5 class="mb-0">XGBoost</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="display-6 mb-2">{{ prediction_details.xgb }}</div>
+                                <p class="mb-0 small">Gradient boosting model</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-dt">
+                            <div class="card-header bg-dt">
+                                <h5 class="mb-0">Decision Tree</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="display-6 mb-2">{{ prediction_details.dt }}</div>
+                                <p class="mb-0 small">Interpretable model</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if is_future_prediction %}
+                <div class="mt-3">
+                    <h5><i class="bi bi-lightning me-2"></i>Future Prediction Methodology</h5>
+                    <p>For years beyond our historical data (2023), we use trend extrapolation:</p>
+                    <ol>
+                        <li>Calculate recent trends from 2020-2023 data</li>
+                        <li>Project these trends forward to your selected year ({{ input.year }})</li>
+                        <li>Apply dampening factors for distant future predictions to account for increasing uncertainty</li>
+                    </ol>
+                </div>
+                {% endif %}
+                
+                <p class="mt-3">The final prediction is calculated by averaging the outputs of these three models, which provides a more robust estimate than any single model alone.</p>
+                <div class="alert alert-info">
+                    <i class="bi bi-lightbulb me-2"></i>
+                    <strong>Note:</strong> This prediction represents an estimate based on historical patterns and should be interpreted with appropriate caution.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Result page specific JavaScript could be added here -->
+{% endblock %}

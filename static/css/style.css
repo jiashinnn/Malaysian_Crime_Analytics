@@ -1,0 +1,213 @@
+:root {
+    --primary: #F3CA20;       /* Yellow */
+    --primary-dark: #D4A91F;  /* Darker yellow */
+    --secondary: #F9E79F;     /* Light yellow */
+    --accent: #F1C40F;        /* Golden yellow */
+    --dark: #000000;          /* Dark blue-gray */
+    --text-dark: #000000;     /* Darker blue-gray for text */
+    --success: #27AE60;       /* Green */
+    --info: #3498DB;          /* Blue */
+    --warning: #E67E22;       /* Orange */
+    --danger: #E74C3C;        /* Red */
+    --light: #ECF0F1;         /* Very light gray */
+    --white: #FFFFFF;         /* White */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F8F9FA;
+    color: var(--text-dark);
+}
+
+.navbar {
+    background-color: var(--dark);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--primary) !important;
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    margin: 0 10px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary) !important;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+    border-color: var(--secondary);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: var(--primary);
+    color: var(--dark);
+    font-weight: bold;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--dark);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary-dark);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+.btn-outline-light {
+    border-color: var(--light);
+    color: var(--light);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+footer {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(243, 202, 32, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(243, 202, 32, 0.25);
+}
+
+.prediction-result {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+#power-bi-frame {
+    width: 100%;
+    height: 700px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.dashboard-container {
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-dark);
+}
+
+.display-4, .display-5, .display-6 {
+    color: var(--dark);
+}
+
+.bg-primary-custom {
+    background-color: var(--primary);
+    color: var(--dark);
+}
+
+.bg-secondary-custom {
+    background-color: var(--secondary);
+    color: var(--dark);
+}
+
+.alert-info {
+    background-color: var(--secondary);
+    border-color: var(--primary);
+    color: var(--dark);
+}
+
+.border-assault {
+    border-color: var(--danger);
+}
+
+.border-property {
+    border-color: var(--warning);
+}
+
+.bg-assault {
+    background-color: var(--danger);
+    color: var(--white);
+}
+
+.bg-property {
+    background-color: var(--warning);
+    color: var(--dark);
+}
+
+.border-rf {
+    border-color: var(--success);
+}
+
+.border-xgb {
+    border-color: var(--primary);
+}
+
+.border-dt {
+    border-color: var(--info);
+}
+
+.bg-rf {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+.bg-xgb {
+    background-color: var(--primary);
+    color: var(--dark);
+}
+
+.bg-dt {
+    background-color: var(--info);
+    color: var(--white);
+} 

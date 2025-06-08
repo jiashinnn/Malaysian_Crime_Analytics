@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Error - Crime Statistics Malaysia{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0"><i class="bi bi-exclamation-triangle-fill me-2"></i>Error</h4>
+            </div>
+            <div class="card-body text-center py-5">
+                <i class="bi bi-x-circle text-danger" style="font-size: 5rem;"></i>
+                <h3 class="mt-4 mb-3">Something went wrong</h3>
+                <p class="lead mb-4">{{ error }}</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="/predict" class="btn btn-primary me-md-2">
+                        <i class="bi bi-arrow-left me-1"></i> Back to Prediction Form
+                    </a>
+                    <a href="/" class="btn btn-outline-primary">
+                        <i class="bi bi-house me-1"></i> Return to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

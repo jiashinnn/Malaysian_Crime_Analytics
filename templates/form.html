@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction System - Crime Statistics Malaysia{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        <h1 class="display-5 fw-bold mb-3">Crime Prediction System</h1>
+        <p class="lead">Forecast crime counts based on location, category, type, and year</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-lightning me-2"></i>Predict Crime Count</h4>
+            </div>
+            <div class="card-body">
+                <form action="/predict" method="post" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <select class="form-select" id="state" name="state" required>
+                            <option value="" selected disabled>Select a state</option>
+                            <option value="Johor">Johor</option>
+                            <option value="Kedah">Kedah</option>
+                            <option value="Kelantan">Kelantan</option>
+                            <option value="Melaka">Melaka</option>
+                            <option value="Negeri Sembilan">Negeri Sembilan</option>
+                            <option value="Pahang">Pahang</option>
+                            <option value="Perak">Perak</option>
+                            <option value="Perlis">Perlis</option>
+                            <option value="Pulau Pinang">Pulau Pinang</option>
+                            <option value="Sabah">Sabah</option>
+                            <option value="Sarawak">Sarawak</option>
+                            <option value="Selangor">Selangor</option>
+                            <option value="Terengganu">Terengganu</option>
+                            <option value="W.P. Kuala Lumpur">W.P. Kuala Lumpur</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a state
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="district" class="form-label">District</label>
+                        <select class="form-select" id="district" name="district" required>
+                            <option value="" selected disabled>Select a district</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a district
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Crime Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" selected disabled>Select a category</option>
+                            <option value="assault">Assault</option>
+                            <option value="property">Property</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a crime category
+                        </div>
+                        
+                        <div class="category-info mt-2" id="category-info-container">
+                            <!-- This will be populated based on category selection -->
+                            <div id="assault-info" style="display: none;">
+                                <div class="alert alert-danger">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    <strong>Assault crimes</strong> are offenses against persons involving physical harm or threats.
+                                </div>
+                            </div>
+                            <div id="property-info" style="display: none;">
+                                <div class="alert alert-warning">
+                                    <i class="bi bi-shield-exclamation me-2"></i>
+                                    <strong>Property crimes</strong> involve theft or destruction of someone else's property.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Crime Type</label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="" selected disabled>Select a type</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a crime type
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Year</label>
+                        <input type="number" class="form-control" id="year" name="year" min="2016" max="2030" value="2023" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid year (2016-2030)
+                        </div>
+                        <div class="form-text mt-1">
+                            <small><i class="bi bi-info-circle me-1"></i> Historical data: 2016-2023. Future predictions (2024-2030) will be extrapolated with reduced accuracy.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-lightning me-1"></i> Generate Prediction
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>About This Prediction System</h4>
+            </div>
+            <div class="card-body">
+                <p>Our prediction system uses advanced machine learning algorithms to forecast crime counts based on historical data from Malaysia. The system focuses on two main crime categories:</p>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-assault">
+                            <div class="card-header bg-assault">
+                                <h5 class="mb-0">Assault Crimes</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="mb-0">
+                                    <li>Causing Injury</li>
+                                    <li>Murder</li>
+                                    <li>Rape</li>
+                                    <li>Robbery (Gang/Solo, Armed/Unarmed)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-property">
+                            <div class="card-header bg-property">
+                                <h5 class="mb-0">Property Crimes</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="mb-0">
+                                    <li>Break-ins</li>
+                                    <li>General Theft</li>
+                                    <li>Vehicle Theft (Lorry)</li>
+                                    <li>Vehicle Theft (Car)</li>
+                                    <li>Vehicle Theft (Motorcycle)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mt-3">The prediction model was trained on historical data from 2016-2023 across all Malaysian states and districts. Future predictions use trend extrapolation based on these patterns.</p>
+                <div class="alert alert-info mt-3">
+                    <i class="bi bi-lightbulb me-2"></i>
+                    <strong>Note:</strong> Predictions are estimates based on historical trends and should be used for informational purposes only. Accuracy diminishes for years beyond the training data (2023).
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Form validation script -->
+<script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
+
+<!-- Additional script for category information display -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categorySelect = document.getElementById('category');
+        const assaultInfo = document.getElementById('assault-info');
+        const propertyInfo = document.getElementById('property-info');
+        
+        categorySelect.addEventListener('change', function() {
+            // Hide all info panels first
+            assaultInfo.style.display = 'none';
+            propertyInfo.style.display = 'none';
+            
+            // Show the relevant info panel based on selection
+            if (this.value === 'assault') {
+                assaultInfo.style.display = 'block';
+            } else if (this.value === 'property') {
+                propertyInfo.style.display = 'block';
+            }
+        });
+    });
+</script>
+{% endblock %}
