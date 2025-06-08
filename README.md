@@ -1,7 +1,5 @@
 # Malaysian Crime Statistics & Prediction System
 
-![Banner](static/images/banner.jpg)
-
 ## Overview
 
 This web application provides comprehensive insights into crime statistics across Malaysia with data visualization and predictive analytics capabilities. The system analyzes crime data by states, districts, categories, and trends to help users understand patterns and make informed predictions.
