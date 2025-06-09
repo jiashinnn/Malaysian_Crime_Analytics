@@ -96,23 +96,11 @@ pip install -r requirements.txt
 ```
 
 4. Run the application
-
-For development:
 ```bash
 python app.py
 ```
 
-For production (using Gunicorn):
-```bash
-gunicorn app:app
-```
-
-Or test Gunicorn locally:
-```bash
-python run_gunicorn.py
-```
-
-5. Access the application at http://localhost:5000 (Flask) or http://localhost:8000 (Gunicorn)
+5. Access the application at http://localhost:5000
 
 ## Project Structure
 
@@ -158,35 +146,6 @@ Make crime count predictions:
 5. Click "Generate Prediction" to see results
 
 For future predictions (2024-2030), the system will extrapolate trends with appropriate confidence warnings.
-
-## Deployment
-
-### Render.com Deployment
-
-This application is configured for easy deployment on Render.com:
-
-1. Fork or clone this repository
-2. Connect your GitHub repository to Render.com
-3. Use the included `render.yaml` configuration file for automatic setup
-4. Or manually create a new Web Service with these settings:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-   - **Environment**: Python 3.11.4
-
-The app will automatically use production settings when deployed.
-
-### Environment Variables
-
-You can set these environment variables in your deployment:
-- `FLASK_DEBUG`: Set to `false` for production (default)
-- `PYTHON_VERSION`: Python version (default: 3.11.4)
-
-### Testing Deployment Locally
-
-Before deploying, test with Gunicorn locally:
-```bash
-python run_gunicorn.py
-```
 
 ## Limitations
 

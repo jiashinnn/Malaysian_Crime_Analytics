@@ -1,50 +1,22 @@
 from flask import Flask, render_template, request, url_for
 import pickle
 import numpy as np
-import os
-import warnings
-# Suppress sklearn version warnings for model loading
-warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
 
 # Load ensemble model and label encoders
-try:
-    with open("ensemble_crime_model.pkl", "rb") as f:
-        model_data = pickle.load(f)
-    
-    rf_model = model_data["RandomForest"]
-    xgb_model = model_data["XGBoost"]
-    dt_model = model_data["DecisionTree"]
-    encoders = model_data["LabelEncoders"]
-    print("Models loaded successfully!")
-    
-except Exception as e:
-    print(f"Error loading models: {e}")
-    print("Please ensure all required packages are installed with correct versions.")
-    # Create dummy models for testing (not recommended for production)
-    rf_model = None
-    xgb_model = None
-    dt_model = None
-    encoders = None
+with open("ensemble_crime_model.pkl", "rb") as f:
+    model_data = pickle.load(f)
+
+rf_model = model_data["RandomForest"]
+xgb_model = model_data["XGBoost"]
+dt_model = model_data["DecisionTree"]
+encoders = model_data["LabelEncoders"]
 
 # Flask app
 app = Flask(__name__, static_folder='static')
 
-# Configure app for production
-app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
-
 @app.route('/')
 def home():
     return render_template('index.html', active_page='home')
-
-@app.route('/health')
-def health_check():
-    """Simple health check endpoint"""
-    model_status = "loaded" if all([rf_model, xgb_model, dt_model, encoders]) else "failed"
-    return {
-        "status": "healthy",
-        "models": model_status,
-        "numpy_version": np.__version__ if 'np' in globals() else "not loaded"
-    }
 
 @app.route('/dashboard')
 def dashboard():
@@ -56,11 +28,6 @@ def predict_form():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Check if models are loaded
-    if rf_model is None or xgb_model is None or dt_model is None or encoders is None:
-        error_message = "Models failed to load. Please check server configuration and package versions."
-        return render_template('error.html', error=error_message, active_page='predict')
-    
     # Get input from form
     state = request.form['state']
     district = request.form['district']
@@ -179,5 +146,9 @@ def page_not_found(e):
 def server_error(e):
     return render_template('error.html', error="Server error occurred", active_page=None), 500
 
-# For Gunicorn deployment, we don't need the if __name__ == '__main__' block
-# Gunicorn will look for the 'app' variable to run the Flask application
+if __name__ == '__main__':
+    # For local development
+    app.run(debug=True, host='127.0.0.1', port=5000)
+
+# For production deployment (Render will use this)
+app.config['ENV'] = 'production'
