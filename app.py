@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for
 import pickle
 import numpy as np
+import os
 
 # Load ensemble model and label encoders
 with open("ensemble_crime_model.pkl", "rb") as f:
@@ -13,6 +14,9 @@ encoders = model_data["LabelEncoders"]
 
 # Flask app
 app = Flask(__name__, static_folder='static')
+
+# Configure app for production
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 
 @app.route('/')
 def home():
@@ -146,5 +150,5 @@ def page_not_found(e):
 def server_error(e):
     return render_template('error.html', error="Server error occurred", active_page=None), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# For Gunicorn deployment, we don't need the if __name__ == '__main__' block
+# Gunicorn will look for the 'app' variable to run the Flask application
