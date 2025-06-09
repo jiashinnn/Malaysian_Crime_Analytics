@@ -4,13 +4,18 @@ import numpy as np
 import os
 
 # Load ensemble model and label encoders
-with open("ensemble_crime_model.pkl", "rb") as f:
-    model_data = pickle.load(f)
-
-rf_model = model_data["RandomForest"]
-xgb_model = model_data["XGBoost"]
-dt_model = model_data["DecisionTree"]
-encoders = model_data["LabelEncoders"]
+try:
+    with open("ensemble_crime_model.pkl", "rb") as f:
+        model_data = pickle.load(f)
+    
+    rf_model = model_data["RandomForest"]
+    xgb_model = model_data["XGBoost"]
+    dt_model = model_data["DecisionTree"]
+    encoders = model_data["LabelEncoders"]
+    print("Models loaded successfully")
+except Exception as e:
+    print(f"Error loading model: {e}")
+    # We'll handle this case in each route
 
 # Flask app
 app = Flask(__name__, static_folder='static')
@@ -29,6 +34,11 @@ def predict_form():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # Check if models are loaded
+    if 'rf_model' not in globals() or 'xgb_model' not in globals() or 'dt_model' not in globals() or 'encoders' not in globals():
+        error_message = "Model not loaded properly. Please contact the administrator."
+        return render_template('error.html', error=error_message, active_page='predict')
+        
     # Get input from form
     state = request.form['state']
     district = request.form['district']
