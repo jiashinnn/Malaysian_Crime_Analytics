@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, url_for
 import pickle
 import numpy as np
-import os
 
 # Load ensemble model and label encoders
 with open("ensemble_crime_model.pkl", "rb") as f:
@@ -14,8 +13,6 @@ encoders = model_data["LabelEncoders"]
 
 # Flask app
 app = Flask(__name__, static_folder='static')
-# Set a secret key for production
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-dev-key')
 
 @app.route('/')
 def home():
@@ -150,6 +147,4 @@ def server_error(e):
     return render_template('error.html', error="Server error occurred", active_page=None), 500
 
 if __name__ == '__main__':
-    # Use environment variables for host and port in production
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)

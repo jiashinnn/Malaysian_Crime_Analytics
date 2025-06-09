@@ -102,27 +102,6 @@ python app.py
 
 5. Access the application at http://localhost:5000
 
-## Deployment to Render
-
-This application is configured for easy deployment to Render using the included `render.yaml` file:
-
-1. Create a Render account at [render.com](https://render.com/)
-
-2. Connect your GitHub repository to Render:
-   - Go to your Render dashboard
-   - Click "New" and select "Blueprint"
-   - Connect your GitHub account and select this repository
-   - Render will automatically detect the `render.yaml` file
-
-3. Configure environment variables (optional):
-   - SECRET_KEY: A secure random string for Flask sessions
-
-4. Click "Apply" to deploy your application
-
-5. Once deployed, Render will provide a URL to access your application
-
-Note: The first deployment may take several minutes as Render builds your application.
-
 ## Project Structure
 
 ```
