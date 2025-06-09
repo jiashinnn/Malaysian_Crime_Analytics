@@ -3,53 +3,23 @@ import pickle
 import numpy as np
 import os
 
-# Initialize model variables
-rf_model = None
-xgb_model = None
-dt_model = None
-encoders = None
-model_loaded = False
-
-# Create dummy prediction function for when model isn't loaded
-def get_mock_prediction(state, district, category, crime_type, year):
-    # Return a simple mock prediction that at least provides some value
-    # This is just a placeholder that returns a random value between 10-100
-    import random
-    base_value = random.randint(10, 100)
-    
-    # Apply some simple rules to make it somewhat realistic
-    if category.lower() == 'assault':
-        base_value = int(base_value * 0.7)  # Fewer assault crimes in general
-    
-    if year > 2023:
-        # Trend adjustments for future years
-        years_ahead = year - 2023
-        trend_factor = 1 + (years_ahead * 0.05)  # 5% increase per year
-        base_value = int(base_value * trend_factor)
-    
-    return base_value
-
 # Load ensemble model and label encoders
-try:
-    with open("ensemble_crime_model.pkl", "rb") as f:
-        model_data = pickle.load(f)
-    
-    rf_model = model_data["RandomForest"]
-    xgb_model = model_data["XGBoost"]
-    dt_model = model_data["DecisionTree"]
-    encoders = model_data["LabelEncoders"]
-    model_loaded = True
-    print("Models loaded successfully")
-except Exception as e:
-    print(f"Error loading model: {e}")
-    # We'll handle this case in each route
+with open("ensemble_crime_model.pkl", "rb") as f:
+    model_data = pickle.load(f)
+
+rf_model = model_data["RandomForest"]
+xgb_model = model_data["XGBoost"]
+dt_model = model_data["DecisionTree"]
+encoders = model_data["LabelEncoders"]
 
 # Flask app
 app = Flask(__name__, static_folder='static')
+# Set a secret key for production
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-dev-key')
 
 @app.route('/')
 def home():
-    return render_template('index.html', active_page='home', model_loaded=model_loaded)
+    return render_template('index.html', active_page='home')
 
 @app.route('/dashboard')
 def dashboard():
@@ -57,9 +27,7 @@ def dashboard():
 
 @app.route('/predict')
 def predict_form():
-    if not model_loaded:
-        return render_template('form.html', active_page='predict', model_error=True)
-    return render_template('form.html', active_page='predict', model_error=False)
+    return render_template('form.html', active_page='predict')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -69,39 +37,6 @@ def predict():
     category = request.form['category']  # Will be 'assault' or 'property'
     crime_type = request.form['type']    # Will be specific type based on category
     year = int(request.form['year'])     # Between 2016-2030
-    
-    # Display values for debugging
-    print(f"Predicting for: State={state}, District={district}, Category={category}, Type={crime_type}, Year={year}")
-    
-    # Check if models are loaded - if not, use mock prediction
-    if not model_loaded:
-        # Use mock prediction
-        mock_prediction = get_mock_prediction(state, district, category, crime_type, year)
-        
-        # Create dummy prediction details
-        prediction_details = {
-            'rf': mock_prediction - 5,
-            'xgb': mock_prediction + 5,
-            'dt': mock_prediction
-        }
-        
-        # Create context with mock data
-        context = {
-            'prediction': mock_prediction,
-            'prediction_details': prediction_details,
-            'input': {
-                'state': state,
-                'district': district,
-                'category': category.capitalize(),
-                'type': crime_type.replace('_', ' ').title(),
-                'year': year
-            },
-            'is_future_prediction': year > 2023,
-            'active_page': 'predict',
-            'is_mock': True
-        }
-        
-        return render_template('result.html', **context)
     
     # Display values for debugging
     print(f"Predicting for: State={state}, District={district}, Category={category}, Type={crime_type}, Year={year}")
@@ -215,4 +150,6 @@ def server_error(e):
     return render_template('error.html', error="Server error occurred", active_page=None), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    # Use environment variables for host and port in production
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

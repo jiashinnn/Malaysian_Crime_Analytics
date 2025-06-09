@@ -20,13 +20,6 @@
                 <h2 class="mb-3">Predicted Crime Count</h2>
                 <div class="prediction-result mb-4">{{ prediction }}</div>
                 
-                {% if is_mock %}
-                <div class="alert alert-danger mb-4">
-                    <i class="bi bi-exclamation-circle me-2"></i>
-                    <strong>Demo Mode:</strong> The prediction system is currently running in demo mode with simulated data. The prediction shown is an approximation and not based on the actual trained model.
-                </div>
-                {% endif %}
-                
                 {% if is_future_prediction %}
                 <div class="alert alert-warning mb-4">
                     <i class="bi bi-exclamation-triangle me-2"></i>
