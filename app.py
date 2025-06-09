@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for
 import pickle
 import numpy as np
+import os
 
 # Load ensemble model and label encoders
 with open("ensemble_crime_model.pkl", "rb") as f:
@@ -147,4 +148,4 @@ def server_error(e):
     return render_template('error.html', error="Server error occurred", active_page=None), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
