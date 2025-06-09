@@ -7,6 +7,13 @@
     <div class="col-12 text-center">
         <h1 class="display-5 fw-bold mb-3">Crime Prediction System</h1>
         <p class="lead">Forecast crime counts based on location, category, type, and year</p>
+        
+        {% if model_error %}
+        <div class="alert alert-warning mx-auto mt-3" style="max-width: 700px;">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <strong>Notice:</strong> The prediction system is currently running in demo mode. Results will be simulated estimates rather than actual model predictions.
+        </div>
+        {% endif %}
     </div>
 </div>
 
