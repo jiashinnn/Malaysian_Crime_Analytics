@@ -155,7 +155,7 @@ For future predictions (2024-2030), the system will extrapolate trends with appr
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Thanks to Koy Chang Wei for helping me deploy my system through the render dashboard. You can assess my system through this link [Malaysia Crime Analytics](https://malaysian-crime-analytics-2.onrender.com/) 
 
 ## License
 
