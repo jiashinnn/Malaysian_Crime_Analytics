@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # Load ensemble model and label encoders
-with open("backend/models/ensemble_crime_model.pkl", "rb") as f:
+with open("models/ensemble_crime_model.pkl", "rb") as f:
     model_data = pickle.load(f)
 
 rf_model = model_data["RandomForest"]
@@ -12,7 +12,7 @@ dt_model = model_data["DecisionTree"]
 encoders = model_data["LabelEncoders"]
 
 # Flask app
-app = Flask(__name__, static_folder='frontend/static', template_folder='frontend/templates')
+app = Flask(__name__, static_folder='../frontend/static', template_folder='../frontend/templates')
 
 @app.route('/')
 def home():
