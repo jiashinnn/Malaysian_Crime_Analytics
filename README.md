@@ -131,11 +131,9 @@ Convicted_Crime_in_Malaysia/
 │       └── result.html     # Prediction results
 ├── notebooks/              # Jupyter notebooks for analysis
 │   └── crime_prediction.ipynb
-├── scripts/                # Utility scripts
-│   └── create_templates.ps1
-└── docs/                   # Documentation
-    ├── README.md          # Detailed project documentation
-    └── LICENSE            # License file
+└── create_templates.ps1
+└── README.md          # Detailed project documentation
+└── LICENSE            # License file
 ```
 
 ## Usage Guide
