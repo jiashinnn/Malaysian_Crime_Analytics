@@ -105,25 +105,37 @@ python app.py
 ## Project Structure
 
 ```
-malaysian-crime-analytics/
-├── app.py                  # Main Flask application
-├── ensemble_crime_model.pkl # Trained ML models
-├── requirements.txt        # Project dependencies
-├── static/                 # Static assets
-│   ├── css/                # Stylesheets
-│   │   └── style.css       # Main stylesheet
-│   ├── js/                 # JavaScript files
-│   │   ├── main.js         # Main JavaScript
-│   │   └── form-validation.js # Form validation script
-│   └── images/             # Image assets
-├── templates/              # HTML templates
-│   ├── base.html           # Base template with layout
-│   ├── index.html          # Home page
-│   ├── dashboard.html      # Dashboard page
-│   ├── form.html           # Prediction form
-│   ├── result.html         # Prediction results
-│   └── error.html          # Error page
-└── README.md               # Project documentation
+Convicted_Crime_in_Malaysia/
+├── app.py                  # Main Flask application (root for deployment)
+├── requirements.txt        # Python dependencies (root for deployment)
+├── run_app.ps1            # PowerShell script to easily start the app
+├── backend/                # Backend data and models
+│   ├── models/             # Machine learning models
+│   │   └── ensemble_crime_model.pkl
+│   └── data/               # Data files
+│       └── crime_district.csv
+├── frontend/               # Frontend assets
+│   ├── static/             # CSS, JS, and other static files
+│   │   ├── css/
+│   │   │   └── style.css   # Main stylesheet
+│   │   └── js/
+│   │       ├── dashboard.js
+│   │       ├── form-validation.js
+│   │       └── main.js     # Main JavaScript
+│   └── templates/          # HTML templates
+│       ├── base.html       # Base template with layout
+│       ├── dashboard.html  # Dashboard page
+│       ├── error.html      # Error page
+│       ├── form.html       # Prediction form
+│       ├── index.html      # Home page
+│       └── result.html     # Prediction results
+├── notebooks/              # Jupyter notebooks for analysis
+│   └── crime_prediction.ipynb
+├── scripts/                # Utility scripts
+│   └── create_templates.ps1
+└── docs/                   # Documentation
+    ├── README.md          # Detailed project documentation
+    └── LICENSE            # License file
 ```
 
 ## Usage Guide
@@ -147,15 +159,16 @@ Make crime count predictions:
 
 For future predictions (2024-2030), the system will extrapolate trends with appropriate confidence warnings.
 
+## Deployment
+
+You can assess my system through this link [Malaysia Crime Analytics](https://malaysian-crime-analytics-2.onrender.com/) 
+
 ## Limitations
 
 - Predictions are estimates based on historical patterns and should be used for informational purposes only
 - Accuracy diminishes for predictions beyond the training data period (2023)
 - The system does not account for unforeseen socioeconomic or policy changes that may affect crime rates
 
-## Contributing
-
-Thanks to Koy Chang Wei for helping me deploy my system through the render dashboard. You can assess my system through this link [Malaysia Crime Analytics](https://malaysian-crime-analytics-2.onrender.com/) 
 
 ## License
 
