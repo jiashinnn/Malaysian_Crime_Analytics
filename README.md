@@ -160,6 +160,7 @@ For future predictions (2024-2030), the system will extrapolate trends with appr
 ## Deployment
 
 You can assess my system through this link [Malaysia Crime Analytics](https://malaysian-crime-analytics.onrender.com/) 
+Thanks to Koy Chang Wei for teaching me deploy my system through render dashboard.
 
 ## Limitations
 
